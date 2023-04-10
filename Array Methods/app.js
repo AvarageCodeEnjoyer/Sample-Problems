@@ -1,25 +1,20 @@
 const form = document.getElementById('form')
+const arrayForm = document.getElementById('arrayForm')
 const printArr = document.getElementById('printArr')
+const findMean = document.getElementById('findMean')
+const findMode = document.getElementById('findMode')
+const findMedian = document.getElementById('findMedian')
+const findButtons = document.querySelectorAll('.findButtons')
 const outputNum = document.getElementById('outputNum')
 const currentArr = document.getElementById('currentArr')
 const arrayContainer = document.getElementById('arrayContainer')
+
 let allArrays = {}
 let placeholder = []
 let input1, input2
-// let numArr = [ 45, 50, 30, 30,  2445, 2345, 7564, 17, 17, 17, 238247, 37724, 2847]
-
 class arrMethods {
   constructor(arr) {
     this.arr = arr
-  }
-
-  addArr() {
-    if (isNaN(numInput)) {
-      alert('Must Input A Number')
-      return
-    }
-    this.arr.push(numInput)
-    printArr.innerText = this.arr.join(", ")
   }
 
   findMean() {
@@ -82,9 +77,55 @@ function submitArray(e){
   currentArr.innerText = ""
   arrayContainer.innerHTML += `
     <div>
-      <h3>${arrName}</h3>
-      <span>${allArrays[arrName].arr}</span>
-    </div>
-  `
-  console.log(allArrays[arrName].arr)
+      <input type="radio" name="array" id="${arrName}"/>
+      <label><b>${arrName}</b> ${allArrays[arrName].arr} </label>
+    </div>`
+  // addClick()
 }
+
+function returnName() {
+  let chosen = document.querySelector('[name="array"]:checked')
+  let arrName = chosen.id.replace(/^"|"/$g, '')
+  return arrName
+}
+
+/* let findMethod = [
+  "findMean()",
+  "findMedian()",
+  "findMode()"
+]
+
+function addClick() {
+  for (let i = 0; i < findButtons.length; i++) {
+    findButtons[i].addEventListener('click', e => {
+      let arrName = runMethod()
+      let result = allArrays[arrName][findMethod[i]]()
+      console.log(result)
+    })
+  }
+} */
+
+document.querySelectorAll('[name="array"]').forEach( button => {
+  button.addEventListener('change', () => {
+    addClick()
+    console.log("hello")
+  })
+})
+
+function addClick() {
+  let arrName = returnName()
+  findMean.addEventListener('click', e => {
+    e.preventDefault()
+    outputNum.innerText = allArrays[arrName].findMean()
+  })
+  findMedian.addEventListener('click', e => {
+    outputNum.innerText = allArrays[arrName].findMedian()
+  })
+  findMode.addEventListener('click', e => {
+    outputNum.innerText = allArrays[arrName].findMode()
+  })
+}
+
+
+
+console.log(document.querySelectorAll('[name="array"]'))

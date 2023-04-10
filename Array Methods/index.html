@@ -10,9 +10,9 @@
 </head>
 <body>
   <div class="buttons">
-    <button onclick="findMean()">Find Mean</button>
-    <button onclick="findMedian()">Find Median</button>
-    <button onclick="findMode()">Find Mode</button>
+    <button id="findMean" class="findButtons">Find Mean</button>
+    <button id="findMedian" class="findButtons">Find Median</button>
+    <button id="findMode" class="findButtons">Find Mode</button>
     <span id="printArr"></span>
   </div>
   <div class="container">
@@ -27,7 +27,17 @@
       <button onclick="addNumberToArr(event)">Add number</button>
       <button onclick="submitArray(event)">Submit Array</button>
     </form>
-    <div id="arrayContainer"></div>
+    <div id="arrayContainer">
+      <h2>Select Array</h2>
+      <div>
+        <input type="radio" name="array" id="hello"/>
+        <label><b>Hello</b> 123,1334,14,435 </label>
+      </div>
+      <div>
+        <input type="radio" name="array" id="jek"/>
+        <label><b>jek</b> 13535,26,24,673,35,357</label>
+      </div>
+    </div>
   </div>
 </body>
 </html>
