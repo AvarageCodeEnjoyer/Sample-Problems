@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./StyleSheet.css" rel="StyleSheet">
+  <script defer src="./app.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="buttons">
+    <button onclick="findMean()">Find Mean</button>
+    <button onclick="findMedian()">Find Median</button>
+    <button onclick="findMode()">Find Mode</button>
+    <span id="printArr"></span>
+  </div>
+  <div class="container">
+    <div class="output">
+      <h2>Output</h2>
+      <span id="outputNum"></span>
+    </div>
+    <form action="" id="form">
+      <h2>Make Array</h2>
+      <span id="currentArr"></span>
+      <input type="number" id="numInput" placeholder="Number Input">
+      <button onclick="addNumberToArr(event)">Add number</button>
+      <button onclick="submitArray(event)">Submit Array</button>
+    </form>
+    <div id="arrayContainer"></div>
+  </div>
+</body>
+</html>
