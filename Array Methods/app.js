@@ -57,6 +57,8 @@ class arrMethods {
   }
 }
 
+/* ------------------------ Functions for submitting ------------------------ */
+
 function addNumberToArr(e) {
   e.preventDefault()
   let numInput = parseInt(document.getElementById("numInput").value)
@@ -80,52 +82,24 @@ function submitArray(e){
       <input type="radio" name="array" id="${arrName}"/>
       <label><b>${arrName}</b> ${allArrays[arrName].arr} </label>
     </div>`
-  // addClick()
+  addClick()
 }
-
-function returnName() {
-  let chosen = document.querySelector('[name="array"]:checked')
-  let arrName = chosen.id.replace(/^"|"/$g, '')
-  return arrName
-}
-
-/* let findMethod = [
-  "findMean()",
-  "findMedian()",
-  "findMode()"
-]
 
 function addClick() {
-  for (let i = 0; i < findButtons.length; i++) {
-    findButtons[i].addEventListener('click', e => {
-      let arrName = runMethod()
-      let result = allArrays[arrName][findMethod[i]]()
-      console.log(result)
+  document.querySelectorAll('[name="array"]').forEach(button => {
+    button.addEventListener('change', e => {
+      let arrName = e.target.id
+      currentArr.innerHTML = `<b>Selected Array: </b> ${arrName} <br>${allArrays[arrName].arr.join(", ")}`
+      findMean.addEventListener('click', e => {
+        e.preventDefault()
+        outputNum.innerText = allArrays[arrName].findMean()
+      })
+      findMedian.addEventListener('click', e => {
+        outputNum.innerText = allArrays[arrName].findMedian()
+      })
+      findMode.addEventListener('click', e => {
+        outputNum.innerText = allArrays[arrName].findMode()
+      })
     })
-  }
-} */
-
-document.querySelectorAll('[name="array"]').forEach( button => {
-  button.addEventListener('change', () => {
-    addClick()
-    console.log("hello")
-  })
-})
-
-function addClick() {
-  let arrName = returnName()
-  findMean.addEventListener('click', e => {
-    e.preventDefault()
-    outputNum.innerText = allArrays[arrName].findMean()
-  })
-  findMedian.addEventListener('click', e => {
-    outputNum.innerText = allArrays[arrName].findMedian()
-  })
-  findMode.addEventListener('click', e => {
-    outputNum.innerText = allArrays[arrName].findMode()
   })
 }
-
-
-
-console.log(document.querySelectorAll('[name="array"]'))
