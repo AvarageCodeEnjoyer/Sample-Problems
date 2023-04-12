@@ -4,10 +4,13 @@ const printArr = document.getElementById('printArr')
 const findMean = document.getElementById('findMean')
 const findMode = document.getElementById('findMode')
 const findMedian = document.getElementById('findMedian')
+const findRange = document.getElementById('findRange')
 const findButtons = document.querySelectorAll('.findButtons')
 const outputNum = document.getElementById('outputNum')
 const currentArr = document.getElementById('currentArr')
 const arrayContainer = document.getElementById('arrayContainer')
+
+const randomArr = document.getElementById('randomArr')
 
 let allArrays = {}
 let placeholder = []
@@ -23,7 +26,7 @@ class arrMethods {
     for (i = 0; i < this.arr.length; i++) total += parseInt(this.arr[i])
     let mean = total / i
     mean = Math.floor(mean)
-    return mean
+    return `Mean: ${mean} <br> (The average)`
   }
 
   findMedian() {
@@ -32,13 +35,13 @@ class arrMethods {
     if (sorted.length % 2 == 0) {
       return sorted[i - 1] + sorted[i] / 2
     } else {
-      return sorted[i]
+      return `Median: ${sorted[i]} <br> (The middle number)`
     }
   }
 
   findMode() {
-    let mode = 0
     let n = 0
+    let mode = 0
     this.arr.forEach(num => {
       let count = this.arr.filter(v => v == num)
       if (count.length > n) {
@@ -46,14 +49,15 @@ class arrMethods {
         mode = num
       }
     })
-    return `${mode} Appeared ${n} Times`
+    let result = n == 1 ? `No number appeared multiple times` : `The Mode: ${mode} Appeared ${n} Times`
+    return `${result} <br> (The number that appeared the most)`
   }
 
   findRange() {
     let max = Math.max(...this.arr)
     let min = Math.min(...this.arr)
     let range = max - min
-    return `Min: ${min}, Max: ${max}, Range: ${range}`
+    return `Min: ${min}, Max: ${max}, Range: ${range} <br> (The difference between the biggest and smallest numbers)`
   }
 }
 
@@ -80,7 +84,7 @@ function submitArray(e){
   arrayContainer.innerHTML += `
     <div>
       <input type="radio" name="array" id="${arrName}"/>
-      <label><b>${arrName}</b> ${allArrays[arrName].arr} </label>
+      <label for="${arrName}"><b>${arrName}</b> ${allArrays[arrName].arr.join(", ")} </label>
     </div>`
   addClick()
 }
@@ -92,14 +96,55 @@ function addClick() {
       currentArr.innerHTML = `<b>Selected Array: </b> ${arrName} <br>${allArrays[arrName].arr.join(", ")}`
       findMean.addEventListener('click', e => {
         e.preventDefault()
-        outputNum.innerText = allArrays[arrName].findMean()
+        outputNum.innerHTML = allArrays[arrName].findMean()
       })
       findMedian.addEventListener('click', e => {
-        outputNum.innerText = allArrays[arrName].findMedian()
+        e.preventDefault()
+        outputNum.innerHTML = allArrays[arrName].findMedian()
       })
       findMode.addEventListener('click', e => {
-        outputNum.innerText = allArrays[arrName].findMode()
+        e.preventDefault()
+        outputNum.innerHTML = allArrays[arrName].findMode()
+      })
+      findRange.addEventListener('click', e => {
+        e.preventDefault()
+        outputNum.innerHTML = allArrays[arrName].findRange()
       })
     })
   })
+}
+
+/* ------------------- Generate random arrays for testing ------------------- */
+
+randomArr.addEventListener('click', e => {
+  e.preventDefault()
+  let keys = []
+  for (let i = 0; i < 10; i++) {
+    let arrName = prompt("Name Your Array")
+    if (arrName == null || arrName == "") {
+      alert(`Array must have a name`)
+    }
+    if (keys.includes(arrName)) {
+      alert(`You already have an array named "${arrName}"`)
+    }
+    allArrays[arrName] = new arrMethods(  generateRandomArray())
+    keys = Object.keys(allArrays)
+    console.log(keys)
+    arrayContainer.innerHTML += `
+      <div>
+        <input type="radio" name="array" id="${arrName}"/>
+        <label for="${arrName}"><b>${arrName}</b> ${allArrays[arrName].arr.join(", ")} </label>
+      </div>`
+    addClick()
+  }
+})
+
+
+function generateRandomArray() {
+  const length = Math.floor(Math.random() * 11) + 3;
+  const arr = [];
+  for (let i = 0; i < length; i++) {
+    arr.push(Math.floor(Math.random() * 1000));
+  }
+  return arr;
 }

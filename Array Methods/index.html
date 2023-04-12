@@ -13,22 +13,24 @@
     <button id="findMean" class="findButtons">Find Mean</button>
     <button id="findMedian" class="findButtons">Find Median</button>
     <button id="findMode" class="findButtons">Find Mode</button>
+    <button id="findRange" class="findButtons">Find Range</button>
+    <button id="randomArr" class="findButtons"><b>MAKE RANDOM ARRAY</b></button>
     <span id="printArr"></span>
   </div>
   <div class="container">
-    <div class="output">
-      <h2>Output</h2>
-      <span id="outputNum"></span>
+    <div id="arrayContainer">
+      <h2>Select Array</h2>
     </div>
-    <form action="" id="form">
+    <form id="form">
       <h2>Make Array</h2>
       <span id="currentArr"></span>
       <input type="number" id="numInput" placeholder="Number Input">
       <button onclick="addNumberToArr(event)">Add number</button>
       <button onclick="submitArray(event)">Submit Array</button>
     </form>
-    <div id="arrayContainer">
-      <h2>Select Array</h2>
+    <div class="output">
+      <h2>Output</h2>
+      <span id="outputNum"></span>
     </div>
   </div>
 </body>
