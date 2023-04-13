@@ -33,7 +33,7 @@ class arrMethods {
     let sorted = this.arr.sort()
     let i = Math.floor(sorted.length / 2)
     if (sorted.length % 2 == 0) {
-      return sorted[i - 1] + sorted[i] / 2
+      return sorted[i - 1] + sorted[i]
     } else {
       return `Median: ${sorted[i]} <br> (The middle number)`
     }
