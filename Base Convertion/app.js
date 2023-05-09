@@ -6,7 +6,7 @@ function convertNum(e) {
   e.preventDefault()
   let value = +input.value.trim()
   // Stop code from running if input is zero
-  if (value == 0) {
+  if (value == '') {
     alert("Input needs to be bigger then 0")
     return
   }
@@ -22,5 +22,8 @@ function convertNum(e) {
   let decimalValue = parseInt(value, +from.value)
   // Make result equal to the input value converted to the base value of the second select menu 
   let result = decimalValue.toString(+to.value)
+  if (+to.value === 16) {
+    result = decimalValue.toString(16).toUpperCase();
+  }
   output.innerText = `${result.toUpperCase()}: Base ${+to.value}`
 }
